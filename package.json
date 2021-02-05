@@ -16,7 +16,9 @@
     "format": "npm run prettier -- --write",
     "format:ci": "npm run prettier -- --check",
     "test": "npm run format:ci && npm run lint && npm run unit",
-    "unit": "npx mocha -t 6000 test/**/*.js"
+    "unit": "npx mocha -t 6000 test/**/*.js",
+    "unit:web": "npm run bundle:test && npx http-server ./test -c-1",
+    "bundle:test": "npx browserify test/ecdh.browser.js  > ./test/ecdh.bundle.browser.js && npx browserify lib/index.js --standalone secp256k1 > ./test/bundle.browser.js"
   },
   "browser": {
     "./src/libsecp256k1.js": "./src/libsecp256k1.web.js"
